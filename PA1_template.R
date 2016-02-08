@@ -1,5 +1,4 @@
 #Loading and preprocessing the data
-setwd()
 filepath<-file.path(getwd(),"activity.zip")
 dataset<-read.csv(unz(filepath,"activity.csv"),sep=",")
 #dataset<-na.omit(dataset) /* OPTIONAL */
@@ -24,7 +23,7 @@ library(ggplot2)
 #What is mean total number of steps taken per day?
 #Make a histogram of the total number of steps taken each day
 stepsByDay<-tapply(dataset$step, dataset$date,sum, na.rm=TRUE)
-qplot(stepsByDay, xlab="Steps per day", main="Histogram of the total number steps taken per day", ylim=c(0,20), binwidth=2500)
+qplot(stepsByDay, xlab="Steps per day", main="Histogram of the total number steps taken per day", ylim=c(0,20), binwidth=500)
 
 #Calculate and report the mean and median total number of steps taken per day
 meanSteps<-mean(stepsByDay)
@@ -51,8 +50,7 @@ newDataset$steps<-impute(newDataset$steps, mean)
 
 #Make a histogram of the total number of steps taken each day
 numStepsByDay<-tapply(newDataset$steps, newDataset$date, sum)
-qplot(numStepByDay, xlab="Total steps per day", main="Total number steps taken per day", binwidth=800)
-qplot(numStepsByDay, xlab="Steps per day", main="Histogram of the total number steps taken per day", ylim=c(0,20), binwidth=1500)
+qplot(numStepsByDay, xlab="Steps per day", main="Histogram of the total number steps taken per day", binwidth=500)
 
 #Calculate and report the mean and median total number of steps taken per day
 newMeanSteps<-mean(numStepsByDay)
